@@ -8,8 +8,6 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-    private static final int TAKE_PICTURE = 100;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +17,7 @@ public class MainActivity extends Activity {
         buttonTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                Intent intent = new Intent(getBaseContext(), CameraActivity.class);
                 startActivity(intent);
             }
         });
