@@ -20,14 +20,18 @@ public class CameraActivity extends Activity {
 
         initInstance();
     }
-
+    public void onClick(View v) {
+        Intent intent = new Intent(CameraActivity.this, ShowActivity.class);
+        intent.putExtra("DEVICE_STATE",);
+        startActivity(intent);
+    }
     private void initInstance() {
         initBtnCapture();
         initCameraSurface();
     }
 
     private void initCameraSurface() {
-        
+
 
     }
 
