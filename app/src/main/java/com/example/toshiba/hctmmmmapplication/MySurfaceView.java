@@ -8,7 +8,6 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,6 +16,7 @@ import java.util.List;
 
 public class MySurfaceView extends SurfaceView
         implements SurfaceHolder.Callback {
+
     private static Context mContext;
     private static Camera mCamera;
 
@@ -30,8 +30,8 @@ public class MySurfaceView extends SurfaceView
 
     @SuppressWarnings("deprecation")
     public MySurfaceView(Context context, AttributeSet attrs,
-                         int defaultsyStyle) {
-        super(context, attrs, defaultsyStyle);
+                         int defaultStyle) {
+        super(context, attrs, defaultStyle);
         mContext = context;
 
         SurfaceHolder holder = getHolder();
@@ -71,6 +71,10 @@ public class MySurfaceView extends SurfaceView
     }
 
     public void setmCameraDisplayOrientation() {
+        mCamera.setDisplayOrientation(getOrientation());
+    }
+
+    static int getOrientation() {
         Camera.CameraInfo info =
                 new Camera.CameraInfo();
         Camera.getCameraInfo(0, info);
@@ -102,7 +106,7 @@ public class MySurfaceView extends SurfaceView
         } else {
             result = (info.orientation - degrees + 360) % 360;
         }
-        mCamera.setDisplayOrientation(result);
+        return result;
     }
 
     private static class TakePictureCallback
@@ -116,8 +120,7 @@ public class MySurfaceView extends SurfaceView
                 fos.flush();
                 fos.close();
 
-                Toast.makeText(mContext, "Picture saved.",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "Picture saved.", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -137,4 +140,25 @@ public class MySurfaceView extends SurfaceView
         TakePictureCallback callback = new TakePictureCallback();
         mCamera.takePicture(null, null, null, callback);
     }
+
+    public static void takePicture(Camera.PictureCallback pictureCallback) {
+        Camera.Parameters params = mCamera.getParameters();
+        List<Camera.Size> sizes = params.getSupportedPreviewSizes();
+        Camera.Size selected = sizes.get(0);
+        params.setPictureSize(selected.width, selected.height);
+        params.setJpegQuality(90);
+        params.setRotation(getOrientation());
+
+        mCamera.setParameters(params);
+
+        mCamera.takePicture(null, null, null, pictureCallback);
+    }
 }
+
+
+
+
+
+
+
+
