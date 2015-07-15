@@ -18,17 +18,16 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-
-        Button buttonIntent = (Button)findViewById(R.id.shutter_button);
-
-        buttonIntent.setOnClickListener(new View.OnClickListener() {
+        Button shutterButton = (Button) findViewById(R.id.shutter_button);
+        shutterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ShowActivity.class);
-//                intent.putExtra("DEVICE_STATE",);
-                startActivity(intent);
+                MySurfaceView.takePicture();
+
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
