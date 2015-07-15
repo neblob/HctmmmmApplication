@@ -15,8 +15,12 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button buttonTest = (Button) findViewById(R.id.button_cameramain);
-        buttonTest.setOnClickListener(new View.OnClickListener() {
+        initInstance();
+    }
+
+    private void initInstance() {
+        Button btnTest = (Button) findViewById(R.id.button_cameramain);
+        btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,CameraActivity.class);
