@@ -18,10 +18,21 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        initInstance();
+    }
 
-        Button buttonIntent = (Button)findViewById(R.id.shutter_button);
+    private void initInstance() {
+        initBtnCapture();
+        initCameraSurface();
+    }
 
-        buttonIntent.setOnClickListener(new View.OnClickListener() {
+    private void initCameraSurface() {
+        // TODO: 7/15/2015 AD complete serface view
+    }
+
+    private void initBtnCapture() {
+        Button btnCapture = (Button)findViewById(R.id.shutter_button);
+        btnCapture.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ShowActivity.class);
 //                intent.putExtra("DEVICE_STATE",);
@@ -29,6 +40,7 @@ public class CameraActivity extends Activity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
