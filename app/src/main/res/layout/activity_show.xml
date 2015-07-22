@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/button"
         android:layout_alignParentEnd="true"
-        android:id="@+id/frameLayout">
+        android:id="@+id/fLayout">
 
         <ImageView
             android:layout_width="match_parent"
@@ -41,15 +41,14 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/button" />
-
-        <SeekBar
-            android:layout_width="455dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/sbScale"
-            android:rotation="270"
-            android:layout_alignParentEnd="true"
             android:layout_above="@+id/button"
+            android:background="#DDDDDD" />
+
+
+        <com.example.toshiba.hctmmmmapplication.VerticalSeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/sbScale"
             android:layout_gravity="center" />
 
     </FrameLayout>
