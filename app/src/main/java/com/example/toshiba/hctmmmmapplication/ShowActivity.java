@@ -19,7 +19,7 @@ import java.io.IOException;
 public class ShowActivity extends AppCompatActivity {
 
     String capturedImageUri;
-    SeekBar sbScale;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +39,6 @@ public class ShowActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        sbScale = (SeekBar) findViewById(R.id.sbScale);
-        FrameLayout.MarginLayoutParams lp = new FrameLayout.MarginLayoutParams(image.getWidth(), FrameLayout.LayoutParams.WRAP_CONTENT);
-        sbScale.setLayoutParams(lp);
     }
 
     private void getIntentFromOtherActivity() {
