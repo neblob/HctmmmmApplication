@@ -7,19 +7,16 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 
 import java.io.IOException;
 
 public class ShowActivity extends AppCompatActivity {
 
     String capturedImageUri;
-    SeekBar sbScale;
+    VerticalSeekBar sbScale;
+    ImageView ivCapturedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +28,29 @@ public class ShowActivity extends AppCompatActivity {
         initInstance();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initSeekBar();
+    }
+
+    private void initSeekBar() {
+//        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ivCapturedImage.getLayoutParams().width, ivCapturedImage.getLayoutParams().height);
+//        Log.d("img w", String.valueOf(ivCapturedImage.getWidth()));
+//        Log.d("img h", String.valueOf(ivCapturedImage.getHeight()));
+//        sbScale.setLayoutParams(lp);
+    }
+
     private void initInstance() {
-        ImageView image = (ImageView) this.findViewById(R.id.ivCapturedImage);
+        ivCapturedImage = (ImageView) this.findViewById(R.id.ivCapturedImage);
         try {
-            image.setImageBitmap(prepareImage(capturedImageUri));
+            ivCapturedImage.setImageBitmap(prepareImage(capturedImageUri));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        sbScale = (SeekBar) findViewById(R.id.sbScale);
-        FrameLayout.MarginLayoutParams lp = new FrameLayout.MarginLayoutParams(image.getWidth(), FrameLayout.LayoutParams.WRAP_CONTENT);
-        sbScale.setLayoutParams(lp);
+        sbScale = (VerticalSeekBar) findViewById(R.id.sbScale);
     }
 
     private void getIntentFromOtherActivity() {
